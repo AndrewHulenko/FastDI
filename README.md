@@ -2,16 +2,16 @@
 
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## How it looks in code
+### How it looks in code
 <img src="Docs/FastDI.gif" alt="FastDI" width="700px" />
 
 
-## Support injection by:
+### Support injection by:
 - MonoBehaviour classes
 - Normal classes
 - Interfaces
 
-## Features
+### Features
 - Fast
 - Light
 - Thread-safe
@@ -19,7 +19,7 @@
 - Supports all versions of Unity
 - Different contexts (Global, Scene...)
 
-## Code example
+### Code example
 
 ```
 using FastDI;
