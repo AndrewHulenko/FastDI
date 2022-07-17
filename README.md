@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-### How it looks in code
+### How it looks
 <img src="Docs/FastDI.gif" alt="FastDI" width="700px" />
 
 
@@ -21,7 +21,7 @@
 
 ### Code example
 
-```
+``` csharp
 using FastDI;
 using UnityEngine;
 
