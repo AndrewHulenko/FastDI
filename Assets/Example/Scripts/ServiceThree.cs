@@ -1,5 +1,5 @@
-using FastDI;
 using System;
+using FastDI;
 using UnityEngine;
 
 namespace Example
@@ -15,7 +15,7 @@ namespace Example
         {
             Binder.Install(this);
         }
-
+        
         public void Dispose()
         {
             Binder.Remove(this);

@@ -11,7 +11,7 @@ namespace Example
         {
             Debug.Log("Inject MonoBehaviour - Works");
         }
-        
+
         private void Awake()
         {
             Binder.Install(this);
@@ -20,8 +20,8 @@ namespace Example
 
         private void OnDestroy()
         {
-            _serviceThree.Dispose();
             Binder.Remove(this);
+            _serviceThree.Dispose();
         }
     }
 }

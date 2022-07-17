@@ -7,7 +7,7 @@ namespace Example
     {
         [Inject] private ServiceTwo _serviceTwo;
         [Inject] private IServiceThree _serviceThree;
-        
+
         private void Awake()
         {
             Binder.Install(this);
@@ -15,10 +15,10 @@ namespace Example
 
         private void Start()
         {
-            _serviceTwo?.DoSomething();
-            _serviceThree?.DoSomething();
+            _serviceTwo.DoSomething();
+            _serviceThree.DoSomething();
         }
-        
+
         private void OnDestroy()
         {
             Binder.Remove(this);
