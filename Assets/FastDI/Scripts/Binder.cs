@@ -10,21 +10,21 @@ namespace FastDI
     
     public static class Binder
     {
-        private static readonly ConcurrentDictionary<Context, Container> Containers = new ConcurrentDictionary<Context, Container>();
+        private static readonly ConcurrentDictionary<BinderContext, BinderContainer> Containers = new ConcurrentDictionary<BinderContext, BinderContainer>();
         
         /// <summary>
         /// Install all dependencies in Awake()
         /// Be note. Any call to injected reference should be in the Start() method or higher
         /// because the order of initialization is not guaranteed on different MonoBehaviour objects.
         /// </summary>
-        public static void Install(object instance, Context context = Context.Global)
+        public static void Install(object instance, BinderContext context = BinderContext.Global)
         {
-            if(!Containers.TryGetValue(context, out Container container))
+            if(!Containers.TryGetValue(context, out BinderContainer container))
             {
-                container = new Container(context);
+                container = new BinderContainer(context);
                 if (!Containers.TryAdd(context, container))
                 {
-                    Print.Error("Can't create container in context: " + context, instance);
+                    BinderUtils.PrintError("Can't create container in context: " + context, instance);
                     return;
                 }
             }
@@ -35,11 +35,11 @@ namespace FastDI
         /// <summary>
         /// Remove should be in the OnDestroy().
         /// </summary>
-        public static void Remove(object instance, Context context = Context.Global)
+        public static void Remove(object instance, BinderContext context = BinderContext.Global)
         {
-            if (!Containers.TryGetValue(context, out Container container))
+            if (!Containers.TryGetValue(context, out BinderContainer container))
             {
-                Print.Error("Can't get container in context: " + context, instance);
+                BinderUtils.PrintError("Can't get container in context: " + context, instance);
                 return;
             }
 
