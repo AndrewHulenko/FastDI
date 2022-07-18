@@ -1,6 +1,6 @@
 namespace FastDI
 {
-    public enum Context
+    public enum BinderContext
     {
         Global,
         Scene

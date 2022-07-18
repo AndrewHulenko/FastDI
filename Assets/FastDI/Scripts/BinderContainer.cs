@@ -4,16 +4,15 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace FastDI
 {
-    public class Container
+    public class BinderContainer
     {
-        private readonly Context _context;
+        private readonly BinderContext _context;
         private readonly List<object> _dependentInstances;
 
-        public Container(Context context)
+        public BinderContainer(BinderContext context)
         {
             _context = context;
             _dependentInstances = new List<object>();
@@ -25,12 +24,13 @@ namespace FastDI
             {
                 if (_dependentInstances.Contains(instance))
                 {
-                    Print.Error(instance.GetType().Name + ".cs - is already registered in the context: " + _context, instance);
+                    string message = instance.GetType().Name + ".cs - is already registered in the context: " + _context;
+                    BinderUtils.PrintError(message, instance);
                     return;
                 }
                 _dependentInstances.Add(instance);
+                _dependentInstances.ForEach(FindFieldsWithInjectAttribute);
             }
-            UpdateDependentReferences();
         }
 
         public void Remove(object instance)
@@ -39,18 +39,11 @@ namespace FastDI
             {
                 if (!_dependentInstances.Contains(instance))
                 {
-                    Print.Warning(instance.GetType().Name + ".cs - is not registered in the context: " + _context, instance);
+                    string message = instance.GetType().Name + ".cs - is not registered in the context: " + _context;
+                    BinderUtils.PrintWarning(message, instance);
                     return;
                 }                
-                _dependentInstances.Remove(instance);   
-            }
-            
-            UpdateDependentReferences();
-        }
-        
-        private void UpdateDependentReferences()
-        {
-            lock(_dependentInstances) {
+                _dependentInstances.Remove(instance);
                 _dependentInstances.ForEach(FindFieldsWithInjectAttribute);
             }
         }
@@ -72,34 +65,24 @@ namespace FastDI
 
         private void InjectInField(object instance, FieldInfo field)
         {
-            ConcurrentBag<object> foundObjects = new ConcurrentBag<object>();
+            List<object> foundObjects = new List<object>();
             
             Type fieldType = field.FieldType;
             if (fieldType.IsInterface)
             {
-                Parallel.ForEach(_dependentInstances, dependent =>
-                {
-                    if (dependent.GetType().GetInterfaces().ToList().Contains(fieldType))
-                    {
-                        foundObjects.Add(dependent);
-                    }
-                });
+                foundObjects = _dependentInstances.FindAll(dependent => 
+                    dependent.GetType().GetInterfaces().ToList().Contains(fieldType));
             }
             else if(fieldType.IsClass)
             {
-                Parallel.ForEach(_dependentInstances, dependent =>
-                {
-                    if (dependent.GetType() == fieldType)
-                    {
-                        foundObjects.Add(dependent);
-                    }
-                });                
+                foundObjects = _dependentInstances.FindAll(dependent => dependent.GetType() == fieldType);    
             }
             
             if (foundObjects.Count > 1)
             {
-                string typeName = instance.GetType().Name;
-                Print.Warning(typeName + ".cs, field: " + field + " - found more then one object: " + fieldType + " in context: " + _context, instance);
+                string message = instance.GetType().Name + ".cs, field: " + field + " - found more then one object: " 
+                                 + fieldType + " in context: " + _context;
+                BinderUtils.PrintWarning(message, instance);
             }
             
             object foundObject = foundObjects.FirstOrDefault();

@@ -13,7 +13,7 @@
 
 ### Features
 - Fast
-- Light
+- Lightweight
 - Thread-safe
 - Production tested
 - Supports all versions of Unity

@@ -6,6 +6,8 @@ namespace Example
 {
     public class ServiceThree : IServiceThree, IDisposable
     {
+        [Inject] private ServiceTwo _serviceTwo;
+        
         public void DoSomething()
         {
             Debug.Log("Inject normal class by interface - Works");
