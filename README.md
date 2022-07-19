@@ -5,6 +5,9 @@
 ### How it looks
 <img src="FastDI.gif" alt="FastDI" width="700px" />
 
+### Download
+[Unity Packages](https://github.com/AndrewHulenko/FastDI/releases/tag/FastDI)
+
 
 ### Support injection by:
 - MonoBehaviour classes
