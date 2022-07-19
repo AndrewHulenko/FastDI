@@ -10,7 +10,7 @@ namespace Example
         
         public void DoSomething()
         {
-            Debug.Log("Inject normal class by interface - Works");
+            Debug.Log("Inject regular class by interface - Works");
         }
 
         public ServiceThree()

@@ -8,7 +8,7 @@
 
 ### Support injection by:
 - MonoBehaviour classes
-- Normal classes
+- Regular classes
 - Interfaces
 
 ### Features
@@ -20,6 +20,7 @@
 - Different contexts (Global, Scene...)
 
 ### Code example
+More details can be found in [document](Docs/Description.pdf)
 
 ``` csharp
 using FastDI;
