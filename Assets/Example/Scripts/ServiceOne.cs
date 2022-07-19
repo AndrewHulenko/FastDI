@@ -10,7 +10,7 @@ namespace Example
 
         private void Awake()
         {
-            Binder.Install(this);
+            Binder.Install(this, BinderContext.Scene);
         }
 
         private void Start()
