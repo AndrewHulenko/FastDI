@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ### How it looks
-<img src="Docs/FastDI.gif" alt="FastDI" width="700px" />
+<img src="FastDI.gif" alt="FastDI" width="700px" />
 
 
 ### Support injection by:
@@ -20,7 +20,7 @@
 - Different contexts (Global, Scene...)
 
 ### Code example
-More details can be found in [document](Docs/Description.pdf)
+More details can be found in the [Document](Assets/FastDI/Docs/Description.pdf)
 
 ``` csharp
 using FastDI;
