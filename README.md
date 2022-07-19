@@ -8,6 +8,8 @@
 ### Download
 [Unity Packages](https://github.com/AndrewHulenko/FastDI/releases/tag/FastDI)
 
+### Documentation
+More details can be found in the [Description.pdf](Assets/FastDI/Docs/Description.pdf)
 
 ### Support injection by:
 - MonoBehaviour classes
@@ -23,7 +25,6 @@
 - Different contexts (Global, Scene...)
 
 ### Code example
-More details can be found in the [Document](Assets/FastDI/Docs/Description.pdf)
 
 ``` csharp
 using FastDI;
