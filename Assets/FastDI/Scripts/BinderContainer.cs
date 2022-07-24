@@ -1,8 +1,6 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace FastDI
@@ -25,7 +23,7 @@ namespace FastDI
                 if (_dependentInstances.Contains(instance))
                 {
                     string message = instance.GetType().Name + ".cs - is already registered in the context: " + _context;
-                    BinderUtils.PrintError(message, instance);
+                    BinderUtils.PrintError(BinderUtils.ErrorAlreadyRegistered,  message, instance);
                     return;
                 }
                 _dependentInstances.Add(instance);
@@ -40,7 +38,7 @@ namespace FastDI
                 if (!_dependentInstances.Contains(instance))
                 {
                     string message = instance.GetType().Name + ".cs - is not registered in the context: " + _context;
-                    BinderUtils.PrintWarning(message, instance);
+                    BinderUtils.PrintWarning(BinderUtils.ErrorNotRegistered, message, instance);
                     return;
                 }                
                 _dependentInstances.Remove(instance);
@@ -77,12 +75,12 @@ namespace FastDI
             {
                 foundObjects = _dependentInstances.FindAll(dependent => dependent.GetType() == fieldType);    
             }
-            
+
             if (foundObjects.Count > 1)
             {
                 string message = instance.GetType().Name + ".cs, field: " + field + " - found more then one object: " 
                                  + fieldType + " in context: " + _context;
-                BinderUtils.PrintWarning(message, instance);
+                BinderUtils.PrintWarning(BinderUtils.WarningFoundMoreThenOne, message, instance);
             }
             
             object foundObject = foundObjects.FirstOrDefault();
