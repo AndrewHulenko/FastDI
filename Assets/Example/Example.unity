@@ -218,6 +218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ServiceTwo
       objectReference: {fileID: 0}
+    - target: {fileID: 5772035433083761012, guid: 798947f62ca26ca43a4c0a1270b392e4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5772035433083761013, guid: 798947f62ca26ca43a4c0a1270b392e4, type: 3}
       propertyPath: m_RootOrder
       value: 2
